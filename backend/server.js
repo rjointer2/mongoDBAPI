@@ -4,14 +4,18 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const { graphqlHTTP } = require('express-graphql');
 
 // invoked app 
 
 const PORT = process.env.PORT || 3000
-
 const app = express();
 
 // middleware
+
+app.use('/', graphqlHTTP({
+    graphiql: true
+}))
 
 // routes
 
