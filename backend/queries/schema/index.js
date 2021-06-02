@@ -43,7 +43,6 @@ module.exports = buildSchema(`
         _id: ID!
         username: String!
         email: String!
-        friends: String!
     }
 
     input Thought {
