@@ -25,9 +25,21 @@ module.exports = {
         const user = new Users({
             username: input.userInput.username,
             email: input.userInput.email
+            /* 
+                these will be empty for the 
+                friends and thoughts
+             */
         })
     },
-    deleteuser: () => {
+    deleteuser: userID => {
+        return Users.findByIdAndDelete(userID)
+    },
+    addFriendsToUSer: async (userID, inputFriend) => {
+        // the arg is the a string 
+
+        // using the findOneand Update we can getthe 
+        // document filtered 
+        const user = Users.findOneAndUpdate(userID, )
 
     }
 
