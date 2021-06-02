@@ -7,6 +7,13 @@ module.exports = buildSchema(`
         mutation: RootMutation
     }
 
+    type RootQuery {
+        users: [Users!]!
+        thoughts: [Thoughts!]!
+        reactions: [Reactions!]!
+    }
+
+
     type: User {
         _id: ID!
         username: String!
@@ -23,18 +30,34 @@ module.exports = buildSchema(`
         createdAt: String!
     }
 
-    type: {
+    type: Reaction {
         _id: ID!
-        reactionBidy: String!
+        reactionBody: String!
         createdBy: User!
         reactions: String!
     }
 
-    type RootQuery {
-        users: [Users!]!
-        thoughts: [Thoughts!]!
-        reactions: [Reactions!]!
+
+
+    input UserInput {
+        _id: ID!
+        username: String!
+        email: String!
+        friends: String!
     }
+
+    input Thought {
+        thoughtText: String!
+        reactions: String!
+    }
+
+    input Reaction {
+        reactionBody: String!
+        createdBy: String!
+        createdAt: String!
+    }
+
+
 
     type RootMutation {
         createUser(userInput: UserInput): User
@@ -42,7 +65,10 @@ module.exports = buildSchema(`
         updateUser(userInput: UserInput): User
         addFriendToUser(userInput: UserInput): User
         removeFriendFromUser(userInput: UserInput): User
-        createThought(thoughtInput)
+        createThought(thoughtInput: ThoughtInput): Thought
+        removeThought(thoughtInput: ThoughtInput): Thought
+        createReaction(reactionInput: ReactionInput): Reaction
+        removeReaction(reactionInput: ReactionInput): Reaction
     }
 
 `)

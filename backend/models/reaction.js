@@ -16,4 +16,6 @@ const reactionSchema = new Schema({
     createdAt: {
         type: String,
     }
-})
+});
+
+module.exports = mongoose.model('Reaction', reactionSchema)
