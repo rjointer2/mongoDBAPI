@@ -37,10 +37,29 @@ module.exports = {
     addFriendsToUSer: async (userID, inputFriend) => {
         // the arg is the a string 
 
-        // using the findOneand Update we can getthe 
-        // document filtered 
-        const user = Users.findOneAndUpdate(userID, )
+        try {
+            // first find the user by the id then
+            // push the friend in the array
 
+            const user = await User.findById(userID);
+
+            // get the friends stringed array and parse
+            // it into a object
+
+            const friendsArray = JSON.parse(user.friends);
+            friendsArray.push(inputFriend);
+
+            // stringify the array and update the friend
+            // property
+
+            return user.updateOne(
+                userID,
+                {friends: friendsArray}
+            )
+
+        } catch(err) {
+            throw err
+        }
     }
 
 }
