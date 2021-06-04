@@ -37,7 +37,9 @@ module.exports = buildSchema(`
         reactions: String!
     }
 
-
+    input updateInput {
+        inputRequest: String!
+    }
 
     input UserInput {
         username: String!

@@ -60,8 +60,8 @@ module.exports = {
     deleteUser: input => {
         return Users.findOneAndDelete({
             username: input.friendInput.username
-        }).then(result => {
-            return "delted"
+        }).then(() => {
+            return "deleted"
         })
     },
     addFriendToUser: async input => {
@@ -94,8 +94,19 @@ module.exports = {
             throw err
         }
     },
-    updateUser: () => {
+    updateUser: input => {
+        // pass in string and the string will 
+        // determine the output of the properties 
+        // updates
 
+        if(input.userInput.inputRequest === "username") {
+            const filter = { username: input }
+        }
+
+        if(input === "email") {
+
+        }
+        
     },
     removeFriendToUser: () => {
 
