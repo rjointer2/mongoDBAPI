@@ -1,5 +1,10 @@
 
+// Models 
+
 const Users = require('../../models/user');
+const Thoughts = require('../../models/thought');
+
+// helper functions
 
 const getThoughtsByID = require('../helpers/helpers').getThoughtsByID;
 
@@ -11,12 +16,13 @@ module.exports = {
         
         try {
             // first we will
-            return User.find().then(user => user.map(res => {
+            return Users.find().then(user => user.map(res => {
                 console.log(user)
                 return {
                     ...user._doc,
                     _id: user.id,
-                    thoughts: getThoughtsByID.bind(this, user.thoughts)
+                    thoughts: getThoughtsByID.bind(this, user.username),
+                    friends: user.frineds
                 }
             }))
         } catch(err) {
@@ -51,8 +57,12 @@ module.exports = {
         })
 
     },
-    deleteUser: userID => {
-        return Users.findByIdAndDelete(userID)
+    deleteUser: input => {
+        return Users.findOneAndDelete({
+            username: input.friendInput.username
+        }).then(result => {
+            return "delted"
+        })
     },
     addFriendToUser: async input => {
         // the arg is the a string 
@@ -83,6 +93,18 @@ module.exports = {
         } catch(err) {
             throw err
         }
+    },
+    updateUser: () => {
+
+    },
+    removeFriendToUser: () => {
+
+    },
+    createReaction: () => {
+
+    },
+    removeReaction: () => {
+        
     }
 
 }

@@ -5,11 +5,13 @@
 // import resolvers
 
 const userResolver = require('./usersResolver');
+const thoughtResolver = require('./thoughtResolver');
 
 // merge the resolver in a rootResolver
 
 const rootResolver = {
     ...userResolver,
+    ...thoughtResolver
 }
 
 // export the root resolver into the server

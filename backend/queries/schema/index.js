@@ -25,7 +25,7 @@ module.exports = buildSchema(`
     type Thought {
         _id: ID!
         thoughtText: String!
-        createdBy: User!
+        createdBy: String!
         reactions: String!
         createdAt: String!
     }
@@ -46,7 +46,7 @@ module.exports = buildSchema(`
 
     input ThoughtInput {
         thoughtText: String!
-        reactions: String!
+        createdBy: String!
     }
 
     input ReactionInput {

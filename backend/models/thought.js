@@ -14,7 +14,7 @@ const thoughtSchema = new Schema({
         type: String,
     },
     createdBy: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User'
     },
     reactions: {
