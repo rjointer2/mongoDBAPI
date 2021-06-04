@@ -11,9 +11,16 @@ const { graphqlHTTP } = require('express-graphql');
 const PORT = process.env.PORT || 3000
 const app = express();
 
+// Graph Query Schema
+
+const graphQLSchema = require('./queries/schema/index')
+const graphQLResolvers = require('./queries/resolvers/rootResolver');
+
 // middleware
 
 app.use('/', graphqlHTTP({
+    schema: graphQLSchema,
+    rootValue: graphQLResolvers,
     graphiql: true
 }))
 

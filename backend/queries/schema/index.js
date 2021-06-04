@@ -2,27 +2,27 @@
 const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
-    schema: {
+    schema {
         query: RootQuery
         mutation: RootMutation
     }
 
     type RootQuery {
-        users: [Users!]!
-        thoughts: [Thoughts!]!
-        reactions: [Reactions!]!
+        users: [User!]!
+        thoughts: [Thought!]!
+        reactions: [Reaction!]!
     }
 
 
-    type: User {
+    type User {
         _id: ID!
         username: String!
         email: String!
         friends: String!
-        thoughts: [Thoughts!]
+        thoughts: [Thought!]
     }
 
-    type: Thought {
+    type Thought {
         _id: ID!
         thoughtText: String!
         createdBy: User!
@@ -30,7 +30,7 @@ module.exports = buildSchema(`
         createdAt: String!
     }
 
-    type: Reaction {
+    type Reaction {
         _id: ID!
         reactionBody: String!
         createdBy: User!
@@ -40,20 +40,24 @@ module.exports = buildSchema(`
 
 
     input UserInput {
-        _id: ID!
         username: String!
         email: String!
     }
 
-    input Thought {
+    input ThoughtInput {
         thoughtText: String!
         reactions: String!
     }
 
-    input Reaction {
+    input ReactionInput {
         reactionBody: String!
         createdBy: String!
         createdAt: String!
+    }
+
+    input FriendInput {
+        username: String!
+        friend: String!
     }
 
 
@@ -62,8 +66,8 @@ module.exports = buildSchema(`
         createUser(userInput: UserInput): User
         deleteUser(userInput: UserInput): User
         updateUser(userInput: UserInput): User
-        addFriendToUser(userInput: UserInput): User
-        removeFriendFromUser(userInput: UserInput): User
+        addFriendToUser(friendInput: FriendInput): User
+        removeFriendFromUser(friendInput: FriendInput): User
         createThought(thoughtInput: ThoughtInput): Thought
         removeThought(thoughtInput: ThoughtInput): Thought
         createReaction(reactionInput: ReactionInput): Reaction
