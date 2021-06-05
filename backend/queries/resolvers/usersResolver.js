@@ -6,7 +6,7 @@ const Thoughts = require('../../models/thought');
 
 // helper functions
 
-const getThoughtsByID = require('../helpers/helpers').getThoughtsByID;
+const getThoughtsByUsername = require('../helpers/helpers').getThoughtsByUsername;
 
 module.exports = {
 
@@ -21,7 +21,7 @@ module.exports = {
                 return {
                     ...user._doc,
                     _id: user.id,
-                    thoughts: getThoughtsByID.bind(this, user.username),
+                    thoughts: getThoughtsByUsername.bind(this, user.username),
                     friends: user.friends
                 }
             }))

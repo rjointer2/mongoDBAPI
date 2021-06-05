@@ -30,7 +30,7 @@ const getUserByID = async userID => {
             email: user.email,
             friends: user.friends,
             // helper function here from the thought helper
-            thoughts: getThoughtsByID.bind(this, user.thoughts)
+            thoughts: getThoughtsByUsername.bind(this, user.thoughts)
         }
     } catch(err) {
         throw err
@@ -38,7 +38,7 @@ const getUserByID = async userID => {
 
 }
 
-const getThoughtsByID = async user => {
+const getThoughtsByUsername = async user => {
 
     //  this will passed into the getUserbyID function
     // so we will have to get the thought by the id
@@ -62,5 +62,5 @@ const getThoughtsByID = async user => {
 
 module.exports = {
     getUserByID,
-    getThoughtsByID
+    getThoughtsByUsername
 }
