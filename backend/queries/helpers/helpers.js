@@ -23,7 +23,6 @@ const getUserByID = async userID => {
     const user = await User.findById(userID);
 
     try {
-        console.log(user);
         return {
             ...user,
             _id: user.id,
@@ -39,25 +38,29 @@ const getUserByID = async userID => {
 
 }
 
-const getThoughtsByID = async thoughtID => {
+const getThoughtsByID = async user => {
 
     //  this will passed into the getUserbyID function
     // so we will have to get the thought by the id
-    const thought = await Thought.find({_id: {$in: { thoughtID } }});
+    const thought = await Thought.findOne({
+        username: user.username
+    });
 
     try {
-        thought.map( thoughtItem => {
-            return {
-                ...thought,
-                _id: thought.id,
-                // here we will call the getUSerByID 
-                // to get the id of who created the thought
-                createdBy: getUserByID.bind(this, thought.createdBy),
-                reactions: thoughtItem.reactions
-            }
-        })
+        return {
+            ...thought._doc,
+            _id: thought.id,
+            thoughtText: thought.thoughtText,
+            createdBy: thought.createdBy,
+            createdAt: thought.createdAt
+        }
     } catch (err) {
         throw err
     }
 
+}
+
+module.exports = {
+    getUserByID,
+    getThoughtsByID
 }

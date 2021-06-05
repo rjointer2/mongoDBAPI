@@ -16,13 +16,13 @@ module.exports = {
         
         try {
             // first we will
-            return Users.find().then(user => user.map(res => {
+            return Users.find().then(users => users.map(user => {
                 console.log(user)
                 return {
                     ...user._doc,
                     _id: user.id,
                     thoughts: getThoughtsByID.bind(this, user.username),
-                    friends: user.frineds
+                    friends: user.friends
                 }
             }))
         } catch(err) {

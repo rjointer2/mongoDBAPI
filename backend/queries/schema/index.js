@@ -19,7 +19,7 @@ module.exports = buildSchema(`
         username: String!
         email: String!
         friends: String!
-        thoughts: [Thought!]
+        thoughts: String!
     }
 
     type Thought {
