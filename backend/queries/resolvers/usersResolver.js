@@ -99,8 +99,11 @@ module.exports = {
         // determine the output of the properties 
         // updates
 
+        console.log(input.updateInput.key)
+
+        const filter = { username: input.updateInput.key }
+
         if(input.updateInput.property === "username") {
-            const filter = { username: input.updateInput.key }
             const update = { username: input.updateInput.newProperty }
 
             let updatedProperty = await Users.findOneAndUpdate(filter, update);
@@ -118,12 +121,24 @@ module.exports = {
 
         }
 
-        if(input === "email") {
-            const filter = { username: input.userInput.key }
-            const update = { username: input.userInput.value }
+        console.log('passed?')
+
+        if(input.updateInput.property === "email") {
+            const update = { email: input.updateInput.newProperty }
+            console.log(update)
 
             let updatedProperty = await Users.findOneAndUpdate(filter, update);
             await updatedProperty.save()
+
+            console.log(updatedProperty)
+            
+            return {
+                ...updatedProperty,
+                _id:  updatedProperty.id,
+                email:  updatedProperty.email,
+                friends: updatedProperty.friends,
+                thoughts: updatedProperty.thoughts
+            }
         }
         
     },
