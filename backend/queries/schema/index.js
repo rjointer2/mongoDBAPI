@@ -37,8 +37,10 @@ module.exports = buildSchema(`
         reactions: String!
     }
 
-    input updateInput {
-        inputRequest: String!
+    input UpdateInput {
+        key: String!
+        property: String!
+        newProperty: String!
     }
 
     input UserInput {
@@ -67,7 +69,7 @@ module.exports = buildSchema(`
     type RootMutation {
         createUser(userInput: UserInput): User
         deleteUser(userInput: UserInput): User
-        updateUser(userInput: UserInput): User
+        updateUser(updateInput: UpdateInput): User
         addFriendToUser(friendInput: FriendInput): User
         removeFriendFromUser(friendInput: FriendInput): User
         createThought(thoughtInput: ThoughtInput): Thought

@@ -94,17 +94,36 @@ module.exports = {
             throw err
         }
     },
-    updateUser: input => {
+    updateUser: async input => {
         // pass in string and the string will 
         // determine the output of the properties 
         // updates
 
-        if(input.userInput.inputRequest === "username") {
-            const filter = { username: input }
+        if(input.updateInput.property === "username") {
+            const filter = { username: input.updateInput.key }
+            const update = { username: input.updateInput.newProperty }
+
+            let updatedProperty = await Users.findOneAndUpdate(filter, update);
+            await updatedProperty.save()
+
+            console.log(updatedProperty)
+
+            return {
+                ...updatedProperty,
+                _id:  updatedProperty.id,
+                email:  updatedProperty.email,
+                friends: updatedProperty.friends,
+                thoughts: updatedProperty.thoughts
+            }
+
         }
 
         if(input === "email") {
+            const filter = { username: input.userInput.key }
+            const update = { username: input.userInput.value }
 
+            let updatedProperty = await Users.findOneAndUpdate(filter, update);
+            await updatedProperty.save()
         }
         
     },
