@@ -68,8 +68,6 @@ module.exports = buildSchema(`
         input: String!
     }
 
-
-
     type RootMutation {
         createUser(userInput: UserInput): User
         deleteUser(singleInput: SingleInput): User
