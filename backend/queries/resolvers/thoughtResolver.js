@@ -15,7 +15,8 @@ module.exports = {
                 _id: thought.id,
                 createdBy: thought.createdBy,
                 reactions: thought.reactions,
-                createdAt: thought.createdAt
+                createdAt: thought.createdAt,
+                reactions: thought.reactions
             }
         }))
 
@@ -26,7 +27,7 @@ module.exports = {
                 thoughtText: input.thoughtInput.thoughtText,
                 createdBy: input.thoughtInput.createdBy,
                 createdAt: new Date().toDateString().slice(0, 10),
-                reactions: input.thoughtInput.reactions
+                reactions: "[]"
             })
 
             return thought.save().then(result => {
@@ -35,7 +36,7 @@ module.exports = {
                     _id: result.id,
                     createdAt: result.createdAt,
                     createdBy: result.createdBy,
-                    reactions: "[]",
+                    reactions: result.reactions,
                 }
             })
         } catch (err) {

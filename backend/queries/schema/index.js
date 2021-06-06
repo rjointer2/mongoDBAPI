@@ -37,6 +37,8 @@ module.exports = buildSchema(`
         reactions: String!
     }
 
+
+
     input UpdateInput {
         key: String!
         property: String!
@@ -56,12 +58,15 @@ module.exports = buildSchema(`
     input ReactionInput {
         reactionBody: String!
         createdBy: String!
-        createdAt: String!
     }
 
     input FriendInput {
         username: String!
         friend: String!
+    }
+
+    input SingleInput { 
+        input: String!
     }
 
 
@@ -73,7 +78,7 @@ module.exports = buildSchema(`
         addFriendToUser(friendInput: FriendInput): User
         removeFriendFromUser(friendInput: FriendInput): User
         createThought(thoughtInput: ThoughtInput): Thought
-        removeThought(thoughtInput: ThoughtInput): Thought
+        removeThought(singleInput: SingleInput): Thought
         createReaction(reactionInput: ReactionInput): Reaction
         removeReaction(reactionInput: ReactionInput): Reaction
     }
