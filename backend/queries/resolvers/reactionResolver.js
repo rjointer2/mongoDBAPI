@@ -12,6 +12,22 @@ const Reaction = require('../../models/reaction');
 module.exports = {
 
     // get all reactions
+    reactions: async () => {
+        try {
+            return Reaction.find().then(reactions => reactions.map(reaction => {
+                console.log(reaction)
+                return {
+                    ...reaction._doc,
+                    _id: reaction.id,
+                    reactionBody: reaction.reactionBody,
+                    createdBy: reaction.createdBy,
+                    createdAt: reaction.createdAt
+                }
+            }))
+        } catch(err) {
+            throw err
+        }
+    },
 
     // getReactionsInThought
 
@@ -26,6 +42,7 @@ module.exports = {
         })
 
         return reaction.save().then(result => {
+            console.log(result)
             return {
                 ...result._doc,
                 _id: result.id,
@@ -34,6 +51,11 @@ module.exports = {
                 createdAt: result.createdAt
             }
         })
+    },
 
+    removeReaction: input => {
+        return Reaction.findOneAndDelete({
+            username: input.singleInput.username
+        })
     }
 }

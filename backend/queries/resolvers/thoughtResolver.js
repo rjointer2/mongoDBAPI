@@ -16,7 +16,7 @@ module.exports = {
                 createdBy: thought.createdBy,
                 reactions: thought.reactions,
                 createdAt: thought.createdAt,
-                reactions: thought.reactions
+                reactionBody: thought.reactionBody
             }
         }))
 
@@ -24,12 +24,13 @@ module.exports = {
     createThought: async input => {
         
         try {
-            console.log(input.singleInput.thoughtText)
+            console.log('test')
+            console.log(input.thoughtInput.thoughtText)
             const thought = new Thoughts({
-                thoughtText: input.singleInput.thoughtText,
-                createdBy: input.singleInput.createdBy,
+                thoughtText: input.thoughtInput.thoughtText,
+                createdBy: input.thoughtInput.createdBy,
                 createdAt: new Date().toDateString().slice(0, 10),
-                reactions: "[]"
+                reactionsBody: "[]"
             })
 
             return thought.save().then(result => {

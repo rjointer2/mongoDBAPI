@@ -26,15 +26,14 @@ module.exports = buildSchema(`
         _id: ID!
         thoughtText: String!
         createdBy: String!
-        reactions: String!
+        reactionBody: String!
         createdAt: String!
     }
 
     type Reaction {
         _id: ID!
         reactionBody: String!
-        createdBy: User!
-        reactions: String!
+        createdBy: String!
     }
 
 
@@ -80,7 +79,7 @@ module.exports = buildSchema(`
         createThought(thoughtInput: ThoughtInput): Thought
         removeThought(singleInput: SingleInput): Thought
         createReaction(reactionInput: ReactionInput): Reaction
-        removeReaction(reactionInput: ReactionInput): Reaction
+        removeReaction(singleInput: SingleInput): Reaction
     }
 
 `)

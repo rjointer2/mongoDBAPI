@@ -10,7 +10,7 @@ const reactionSchema = new Schema({
         maxLength: 280
     },
     createdBy: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     createdAt: {

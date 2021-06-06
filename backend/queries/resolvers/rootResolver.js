@@ -6,12 +6,14 @@
 
 const userResolver = require('./usersResolver');
 const thoughtResolver = require('./thoughtResolver');
+const reactionResolver = require('./reactionResolver');
 
 // merge the resolver in a rootResolver
 
 const rootResolver = {
     ...userResolver,
-    ...thoughtResolver
+    ...thoughtResolver,
+    ...reactionResolver
 }
 
 // export the root resolver into the server
