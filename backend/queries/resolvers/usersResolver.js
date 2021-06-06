@@ -58,10 +58,13 @@ module.exports = {
 
     },
     deleteUser: input => {
+        console.log(input.singleInput.input)
         return Users.findOneAndDelete({
-            username: input.friendInput.username
+            username: input.singleInput.input
         }).then(() => {
-            return "deleted"
+            return {
+                _id: "deleted"
+            }
         })
     },
     addFriendToUser: async input => {

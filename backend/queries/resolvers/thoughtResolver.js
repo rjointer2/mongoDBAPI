@@ -22,10 +22,12 @@ module.exports = {
 
     },
     createThought: async input => {
+        
         try {
+            console.log(input.singleInput.thoughtText)
             const thought = new Thoughts({
-                thoughtText: input.thoughtInput.thoughtText,
-                createdBy: input.thoughtInput.createdBy,
+                thoughtText: input.singleInput.thoughtText,
+                createdBy: input.singleInput.createdBy,
                 createdAt: new Date().toDateString().slice(0, 10),
                 reactions: "[]"
             })
@@ -43,7 +45,9 @@ module.exports = {
             throw err
         }
     },
-    removeThought: thoughtID => {
-        return Thoughts.findByIdAndDelete(thoughtID).then
+    removeThought: input => {
+        return Thoughts.findOneAndDelete({
+            username: input.singleInput.username
+        })
     }
 }

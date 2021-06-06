@@ -73,7 +73,7 @@ module.exports = buildSchema(`
 
     type RootMutation {
         createUser(userInput: UserInput): User
-        deleteUser(userInput: UserInput): User
+        deleteUser(singleInput: SingleInput): User
         updateUser(updateInput: UpdateInput): User
         addFriendToUser(friendInput: FriendInput): User
         removeFriendFromUser(friendInput: FriendInput): User
