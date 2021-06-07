@@ -17,7 +17,7 @@ const thoughtSchema = new Schema({
         type: String,
         ref: 'User'
     },
-    reactions: {
+    reactionBody: {
         type: String,
         ref: 'Reactions'
     }

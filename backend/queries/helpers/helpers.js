@@ -42,17 +42,22 @@ const getThoughtsByUsername = async user => {
 
     //  this will passed into the getUserbyID function
     // so we will have to get the thought by the id
-    const thought = await Thought.findOne({
-        createdBy: user.createdBy
-    });
 
     try {
+        const thought = await Thought.findOne({
+            createdBy: user.username
+        });
+
+        console.log(thought)
+
         return {
+
             ...thought,
             _id: thought.id,
             thoughtText: thought.thoughtText,
             createdBy: thought.createdBy,
-            createdAt: thought.createdAt
+            createdAt: thought.createdAt,
+            reactionBody: getReactionByCreatedBy.bind(this, thought)
         }
     } catch (err) {
         throw err
@@ -65,7 +70,7 @@ const getReactionByCreatedBy = async user => {
     const reaction = await Reaction.findOne({
         createdBy: user.createdBy
     })
-    console.log(user)
+    console.log(reaction)
 
     try {
         return {

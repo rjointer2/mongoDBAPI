@@ -15,7 +15,7 @@ module.exports = {
     reactions: async () => {
         try {
             return Reaction.find().then(reactions => reactions.map(reaction => {
-                console.log(reaction)
+                console.log(reaction + "  ?")
                 return {
                     ...reaction._doc,
                     _id: reaction.id,

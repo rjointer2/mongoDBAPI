@@ -8,19 +8,23 @@ const Thoughts = require('../../models/thought');
 const getReactionByCreatedBy = require('../helpers/helpers').getReactionByCreatedBy;
 
 module.exports = {
-    thoughts: () => {
+    thoughts: async () => {
         
-        return Thoughts.find().then(result => result.map(thought => {
-            console.log(thought)
-            return {
-                ...thought._doc,
-                _id: thought.id,
-                createdBy: thought.createdBy,
-                reactions: thought.reactions,
-                createdAt: thought.createdAt,
-                reactions: getReactionByCreatedBy.bind(this, thought)
-            }
-        }))
+        try {
+            return Thoughts.find().then(result => result.map(thought => {
+                return {
+                    ...thought._doc,
+                    _id: thought.id,
+                    thoughtText: thought.thoughtText,
+                    createdBy: thought.createdBy,
+                    reactions: thought.reactions,
+                    createdAt: thought.createdAt,
+                    reactionBody: getReactionByCreatedBy.bind(this, thought)
+                }
+            }))
+        } catch(err) {
+            throw err
+        }
 
     },
     createThought: async input => {
@@ -32,7 +36,7 @@ module.exports = {
                 thoughtText: input.thoughtInput.thoughtText,
                 createdBy: input.thoughtInput.createdBy,
                 createdAt: new Date().toDateString().slice(0, 10),
-                reactions: "[]"
+                reactionBody: "[]"
             })
 
             return thought.save().then(result => {

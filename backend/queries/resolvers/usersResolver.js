@@ -21,7 +21,7 @@ module.exports = {
                 return {
                     ...user._doc,
                     _id: user.id,
-                    thoughts: getThoughtsByUsername.bind(this, user.username),
+                    thoughts: getThoughtsByUsername.bind(this, user),
                     friends: user.friends
                 }
             }))
@@ -157,7 +157,9 @@ module.exports = {
             // matter
     
             newArr = friendsArray.filter(item => item !== input.doubleInput.friend);
+            
             const stringArray = JSON.stringify(newArr);
+    
             user.friends = stringArray
             console.log(user.friends)
             await user.save()
