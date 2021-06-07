@@ -68,12 +68,17 @@ module.exports = buildSchema(`
         input: String!
     }
 
+    input DoubleInput {
+        username: String!
+        friend: String!
+    }
+
     type RootMutation {
         createUser(userInput: UserInput): User
         deleteUser(singleInput: SingleInput): User
         updateUser(updateInput: UpdateInput): User
         addFriendToUser(friendInput: FriendInput): User
-        removeFriendFromUser(friendInput: FriendInput): User
+        removeFriendFromUser(doubleInput: DoubleInput): User
         createThought(thoughtInput: ThoughtInput): Thought
         removeThought(singleInput: SingleInput): Thought
         createReaction(reactionInput: ReactionInput): Reaction

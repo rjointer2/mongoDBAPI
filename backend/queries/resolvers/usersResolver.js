@@ -145,14 +145,33 @@ module.exports = {
         }
         
     },
-    removeFriendToUser: () => {
+    removeFriendFromUser: async input => {
+        try {
+            const user = await Users.findOne({
+                username: input.doubleInput.username
+            });
+    
+            const friendsArray = JSON.parse(user.friends);
+            console.log(friendsArray)
+            // this is a pretty slow array search but speed doesn't 
+            // matter
+    
+            newArr = friendsArray.filter(item => item !== input.doubleInput.friend);
+            const stringArray = JSON.stringify(newArr);
+            user.friends = stringArray
+            console.log(user.friends)
+            await user.save()
 
-    },
-    createReaction: () => {
+            return {
+                ...user,
+                _id:  user.id,
+                email:  user.email,
+                friends: user.friends,
+                thoughts: user.thoughts
+            }
 
-    },
-    removeReaction: () => {
-        
+        } catch(err) {
+            throw err
+        }
     }
-
 }
