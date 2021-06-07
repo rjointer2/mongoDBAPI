@@ -5,6 +5,8 @@ const Thoughts = require('../../models/thought');
 
 // helperFunctions
 
+const getReactionByCreatedBy = require('../helpers/helpers').getReactionByCreatedBy;
+
 module.exports = {
     thoughts: () => {
         
@@ -16,7 +18,7 @@ module.exports = {
                 createdBy: thought.createdBy,
                 reactions: thought.reactions,
                 createdAt: thought.createdAt,
-                reactionBody: thought.reactionBody
+                reactions: getReactionByCreatedBy.bind(this, thought)
             }
         }))
 
@@ -30,7 +32,7 @@ module.exports = {
                 thoughtText: input.thoughtInput.thoughtText,
                 createdBy: input.thoughtInput.createdBy,
                 createdAt: new Date().toDateString().slice(0, 10),
-                reactionsBody: "[]"
+                reactions: "[]"
             })
 
             return thought.save().then(result => {
@@ -39,7 +41,7 @@ module.exports = {
                     _id: result.id,
                     createdAt: result.createdAt,
                     createdBy: result.createdBy,
-                    reactions: result.reactions,
+                    reactionBody: result.reactionBody,
                 }
             })
         } catch (err) {

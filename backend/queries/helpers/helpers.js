@@ -43,12 +43,12 @@ const getThoughtsByUsername = async user => {
     //  this will passed into the getUserbyID function
     // so we will have to get the thought by the id
     const thought = await Thought.findOne({
-        username: user.username
+        createdBy: user.createdBy
     });
 
     try {
         return {
-            ...thought._doc,
+            ...thought,
             _id: thought.id,
             thoughtText: thought.thoughtText,
             createdBy: thought.createdBy,
@@ -60,7 +60,29 @@ const getThoughtsByUsername = async user => {
 
 }
 
+const getReactionByCreatedBy = async user => {
+
+    const reaction = await Reaction.findOne({
+        createdBy: user.createdBy
+    })
+    console.log(user)
+
+    try {
+        return {
+            ...reaction._doc, 
+            reactionBody: reaction.reactionBody,
+            createdBy: reaction.createdBy,
+            createdAt: reaction.createdAt
+        }
+    } catch (err) {
+        throw err
+    }
+
+
+}
+
 module.exports = {
     getUserByID,
-    getThoughtsByUsername
+    getThoughtsByUsername,
+    getReactionByCreatedBy
 }
