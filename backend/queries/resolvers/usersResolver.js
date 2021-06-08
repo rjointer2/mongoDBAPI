@@ -24,7 +24,8 @@ module.exports = {
                     _id: user.id,
                     // if the user doesn't have a thought, skip them
                     thoughts: getThoughtsByUsername.bind(this, user) ,
-                    friends: user.friends
+                    friends: user.friends,
+                    email: user.email
                 }
             })) 
         } catch(err) {
@@ -39,7 +40,7 @@ module.exports = {
             username: input.userInput.username,
             email: input.userInput.email,
             friends: "[]",
-            thoughts: false
+            thoughts: "[]"
             /* 
                 these will be empty for the 
                 friends and thoughts

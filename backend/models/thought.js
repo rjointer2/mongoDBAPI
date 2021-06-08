@@ -18,7 +18,7 @@ const thoughtSchema = new Schema({
         ref: 'User'
     },
     reactionBody: {
-        type: Boolean,
+        type: String,
         ref: 'Reactions'
     }
 });

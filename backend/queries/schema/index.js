@@ -27,7 +27,7 @@ module.exports = buildSchema(`
         thoughtText: String
         createdBy: String
         reactionBody: Reaction
-        createdAt: String!
+        createdAt: String
     }
 
     type Reaction {
