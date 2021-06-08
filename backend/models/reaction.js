@@ -7,11 +7,11 @@ const reactionSchema = new Schema({
     reactionBody: {
         type: String,
         require: true,
-        maxLength: 280
+        maxLength: 280,
     },
     createdBy: {
         type: String,
-        required: true
+        ref: 'User'
     },
     createdAt: {
         type: String,

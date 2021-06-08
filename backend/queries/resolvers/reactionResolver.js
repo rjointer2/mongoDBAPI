@@ -1,13 +1,7 @@
 
 const Reaction = require('../../models/reaction');
 
-/* 
 
-    the reactions are like replies so when the
-    user gets the thoughts, they can see the 
-    reaction and how did it
-
-*/
 
 module.exports = {
 
@@ -15,7 +9,6 @@ module.exports = {
     reactions: async () => {
         try {
             return Reaction.find().then(reactions => reactions.map(reaction => {
-                console.log(reaction + "  ?")
                 return {
                     ...reaction._doc,
                     _id: reaction.id,

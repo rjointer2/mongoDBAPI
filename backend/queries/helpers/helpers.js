@@ -44,21 +44,31 @@ const getThoughtsByUsername = async user => {
     // so we will have to get the thought by the id
 
     try {
+
         const thought = await Thought.findOne({
             createdBy: user.username
         });
 
         console.log(thought)
 
-        return {
+        if(!thought) {
+            return {
+                _id: "N/A",
+                thoughtText: "N/A",
+                createdBy: "N/A",
+                createdAt: "N/A",
+                reactionBody: "N/A"
+            }
+        }
 
-            ...thought,
+        return {
             _id: thought.id,
             thoughtText: thought.thoughtText,
             createdBy: thought.createdBy,
             createdAt: thought.createdAt,
             reactionBody: getReactionByCreatedBy.bind(this, thought)
         }
+
     } catch (err) {
         throw err
     }
@@ -67,14 +77,24 @@ const getThoughtsByUsername = async user => {
 
 const getReactionByCreatedBy = async user => {
 
-    const reaction = await Reaction.findOne({
-        createdBy: user.createdBy
-    })
-    console.log(reaction)
-
     try {
+        const reaction = await Reaction.findOne({
+            createdBy: user.createdBy
+        })
+        console.log(reaction)
+
+        if(!reaction) {
+            return {
+                _id: "N/A",
+                reactionBody: "N/A",
+                createdBy: "N/A",
+                createdAt: "N/A"
+            }
+        }
+
         return {
             ...reaction._doc, 
+            _id: reaction.id,
             reactionBody: reaction.reactionBody,
             createdBy: reaction.createdBy,
             createdAt: reaction.createdAt

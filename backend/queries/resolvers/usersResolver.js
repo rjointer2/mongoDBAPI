@@ -13,23 +13,25 @@ module.exports = {
     //get all users 
 
     users: async () => {
+
         
         try {
             // first we will
             return Users.find().then(users => users.map(user => {
-                console.log(user)
+
                 return {
                     ...user._doc,
                     _id: user.id,
-                    thoughts: getThoughtsByUsername.bind(this, user),
+                    // if the user doesn't have a thought, skip them
+                    thoughts: getThoughtsByUsername.bind(this, user) ,
                     friends: user.friends
                 }
-            }))
+            })) 
         } catch(err) {
             console.log(err)
         }
 
-    },
+    }, 
     createUser: (input) => {
         // we can create a new instance of the user model
         // save the result
@@ -37,7 +39,7 @@ module.exports = {
             username: input.userInput.username,
             email: input.userInput.email,
             friends: "[]",
-            thoughts: "[]"
+            thoughts: false
             /* 
                 these will be empty for the 
                 friends and thoughts

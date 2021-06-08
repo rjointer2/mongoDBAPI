@@ -14,7 +14,7 @@ const userSchema = new Schema({
         require: true,
     },
     thoughts: {
-        type: String,
+        type: Boolean,
         ref: 'Thoughts'
     },
     friends: {

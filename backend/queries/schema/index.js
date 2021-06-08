@@ -10,7 +10,7 @@ module.exports = buildSchema(`
     type RootQuery {
         users: [User!]!
         thoughts: [Thought!]!
-        reactions: [Reaction!]!
+        reactionBody: [Reaction!]!
     }
 
 
@@ -19,21 +19,21 @@ module.exports = buildSchema(`
         username: String!
         email: String!
         friends: String!
-        thoughts: Thought!
+        thoughts: Thought
     }
 
     type Thought {
-        _id: ID!
-        thoughtText: String!
-        createdBy: String!
-        reactionBody: Reaction!
+        _id: ID
+        thoughtText: String
+        createdBy: String
+        reactionBody: Reaction
         createdAt: String!
     }
 
     type Reaction {
-        _id: ID!
-        reactionBody: String!
-        createdBy: String!
+        _id: ID
+        reactionBody: String
+        createdBy: String
     }
 
 

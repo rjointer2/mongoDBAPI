@@ -36,7 +36,7 @@ module.exports = {
                 thoughtText: input.thoughtInput.thoughtText,
                 createdBy: input.thoughtInput.createdBy,
                 createdAt: new Date().toDateString().slice(0, 10),
-                reactionBody: "[]"
+                reactionBody: false
             })
 
             return thought.save().then(result => {
